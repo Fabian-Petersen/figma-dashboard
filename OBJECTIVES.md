@@ -11,7 +11,8 @@
 - Create API Gateway to handle the https requests to the backend
 - Create lambda function with python runtime to handle incoming events
 
-## Stack for the project 
+## Stack for the project
+
 - Nextjs
 - Typescript
 - Axios
@@ -22,3 +23,8 @@
 - Zod
 - Tailwind CSS
 - Shadcn UI
+- React Icons
+
+Architecture
+
+<img src="/public/images/" alt="architecture" width='600'>
