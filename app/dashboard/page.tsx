@@ -1,31 +1,31 @@
 import React from "react";
 import Navbar from "@/components/features/navbar/Navbar";
 import Sidebar from "@/components/Sidebar/Sidebar";
+import Grid from "@/components/dashboard/Grid";
 
-interface DashboardLayoutProps {
-  children?: React.ReactNode;
-}
-
-const DashboardLayout = ({ children }: DashboardLayoutProps) => {
+const DashboardLayout = () => {
   return (
-    // Main container with CSS Grid
-    <div className="w-full min-h-screen grid grid-cols-[20rem_1fr] grid-rows-[auto_1fr]">
-      {/* Sidebar - spans full height, first column */}
-      <div className="row-span-2 col-span-1">
-        <Sidebar />
-      </div>
+    <div className="w-full min-h-screen bg-gray-50">
+      {/* Main grid container */}
+      <div className="grid grid-cols-[280px_1fr] min-h-screen">
+        {/* Sidebar */}
+        <aside className="fixed top-0 left-0 h-screen w-[280px] bg-white">
+          <Sidebar />
+        </aside>
 
-      {/* Navbar - spans second column, first row */}
-      <div className="col-start-2 row-start-1">
-        <Navbar />
-      </div>
+        {/* Main content area with navbar and grid */}
+        <div className="col-start-2 w-full">
+          {/* Navbar */}
+          <div className="sticky top-0 z-10 bg-white dark:border-gray-700">
+            <Navbar />
+          </div>
 
-      {/* Main content area - starts from second column, second row */}
-      <main className="col-start-2 row-start-2 p-6 bg-gray-50 dark:bg-gray-900">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {children}
+          {/* Grid section */}
+          <main className="p-4">
+            <Grid />
+          </main>
         </div>
-      </main>
+      </div>
     </div>
   );
 };

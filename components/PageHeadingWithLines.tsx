@@ -1,4 +1,4 @@
-import PageHeading from "./PageHeading";
+import PageHeading from "./ChartHeading";
 
 type Props = {
   variant?: "mainPage" | "projectPage";

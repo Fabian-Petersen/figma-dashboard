@@ -1,19 +1,21 @@
 "use client";
 
 import Logo from "./Logo";
-import NavbarProgressBar from "./NavbarProgressBar";
-import NavbarActionButtons from "./NavbarActionButtons";
+import Menu from "./menu/Menu";
+import Language from "./language/LanguageSelector";
+import SearchBar from "./SearchBar";
 
 const Navbar = () => {
   return (
     <>
-      <nav className="h-[var(--navbar-height)] w-full py-4 flex items-center bg-white dark:bg-navbarDark shadow-md">
+      <nav className="h-[var(--navbar-height)] w-full py-4 flex items-center bg-white gap-2">
         <Logo variant="navbar" />
-        <div className="flex w-full items-center justify-around">
-          <NavbarActionButtons />
+        <div className="flex items-center gap-4 ml-auto pr-10">
+          <SearchBar />
+          <Language />
+          <Menu />
         </div>
       </nav>
-      <NavbarProgressBar className="justify-end z-[1000]" />
     </>
   );
 };

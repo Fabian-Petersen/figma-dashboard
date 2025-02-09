@@ -1,3 +1,5 @@
+import { PieChart } from "lucide-react";
+
 type LogoProps = {
   variant?: "navbar" | "sidebar";
 };
@@ -10,18 +12,10 @@ const Logo = ({ variant }: LogoProps) => {
           Dashboard
         </div>
       ) : (
-        <p className="text-gray-800 font-greatvibes tracking-wider text-[2rem] text-center w-full border border-green-500">
-          <span
-            className={`font-extrabold text-gray-700 dark:text-gray-700
-            `}
-          >
-            P
-          </span>
-          ortfolio
-          <span className="text-gray-700">.</span>
-          <span className="text-gray-700">.</span>
-          <span className="text-gray-700">.</span>
-        </p>
+        <div className="bg-clr_primary_900 rounded-sm py-4 flex justify-center items-center gap-4">
+          <PieChart size={32} color="#fff" />
+          <p className="text-white text-lg tracking-wider">Dashboard</p>
+        </div>
       )}
     </div>
   );

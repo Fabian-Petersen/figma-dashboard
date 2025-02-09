@@ -1,19 +1,14 @@
 import React from "react";
-import pageLinkData from "@/public/data/pageLinkData";
-import Logo from "../features/navbar/Logo";
+
+import LogoSidebar from "./LogoSidebar";
+import SideBarLinks from "./SideBarLinks";
 
 const Sidebar = () => {
   return (
-    <div className="w-[20rem] h-screen bg-white py-6">
-      <Logo variant="sidebar" />
-      <ul className="p-4 text-lg space-y-10 capitalize text-slate-400 flex pl-[5rem] flex-col border border-red-500 h-full">
-        {pageLinkData.map((link) => (
-          <li key={link.id} className="tracking-wider">
-            <a href={link.url}>{link.name}</a>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <aside className="h-screen w-full bg-white flex flex-col gap-8 pt-14 border-none">
+      <LogoSidebar />
+      <SideBarLinks />
+    </aside>
   );
 };
 
