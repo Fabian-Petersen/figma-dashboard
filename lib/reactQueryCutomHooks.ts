@@ -1,7 +1,7 @@
 "use client";
 
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import customFetch from "./customFetch";
+import customFetch from "./api";
 
 // $ Function to Fetch Data from the Server with a GET request
 export const useFetchItem = (key: string) => {

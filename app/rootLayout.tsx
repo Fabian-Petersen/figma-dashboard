@@ -5,7 +5,7 @@
 import Providers from "./providers";
 
 // $ Import custom hook to check if the size is mobile or not to change Navbar components
-import { useHashScroll } from "./customHooks/useHashScrollHandler";
+import { useHashScroll } from "./hooks/useHashScrollHandler";
 
 type Props = {
   children: React.ReactNode;

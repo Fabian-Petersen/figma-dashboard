@@ -27,4 +27,4 @@
 
 Architecture
 
-<img src="/public/images/" alt="architecture" width='600'>
+<img src="/images/" alt="architecture" width='600'>

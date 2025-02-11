@@ -13,15 +13,19 @@ const config: Config = {
       darkMode: "class",
       fontSize: {
         clampText: "clamp(0.5rem, 0.6vw, 0.8rem)",
+        clamp_landingPage: "clamp(3.5rem, 5vw, 5rem)",
         clampH2: "clamp(1.5rem, 3vw, 1.75rem)",
         clampH3: "clamp(1rem, 2vw, 1.3rem)",
       },
       fontFamily: {
         montserrat: ["Montserrat", "sans-serif"],
         poppins: ["Poppins", "sans-serif"],
+        roboto: ["Roboto", "sans-serif"],
       },
       colors: {
         // $ Figma Design Colors
+        clr_primary_landing: "#172755",
+        clr_landing_red: "#EF2A82",
         clr_primary_900: "#5D5FEF",
         clr_primary_800: "#4079ED",
         clr_primary_300: "#F1F8FD",

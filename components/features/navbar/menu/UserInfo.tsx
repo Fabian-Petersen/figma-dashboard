@@ -10,7 +10,6 @@ function UserInfo() {
           alt="user-image"
           width={30}
           height={30}
-          objectFit="cover"
         />
       </div>
       <div className="flex flex-col justify-center">
