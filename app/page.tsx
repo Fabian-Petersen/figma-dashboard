@@ -63,7 +63,7 @@ export default function Home() {
                       h-[80%] sm:h-[70%] md:h-[80%] lg:h-[90%]"
       >
         <Image
-          src="/images/landingPage/LandingImage.png"
+          src="/images/landingPage/landing_image.svg"
           alt="landing page illustration"
           fill
           priority

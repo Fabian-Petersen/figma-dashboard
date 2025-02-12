@@ -60,7 +60,7 @@ const VisitorInsights = ({ className }: Props) => {
           <Line
             type="monotone"
             dataKey="loyalCustomers"
-            stroke="hsl(var(--chart-1))"
+            stroke="#EF4444"
             strokeWidth={2}
             dot={false}
             name="Loyal Customers"
@@ -68,7 +68,7 @@ const VisitorInsights = ({ className }: Props) => {
           <Line
             type="monotone"
             dataKey="newCustomers"
-            stroke="hsl(var(--chart-2))"
+            stroke="#A700FF"
             strokeWidth={2}
             dot={false}
             name="New Customers"
@@ -76,7 +76,7 @@ const VisitorInsights = ({ className }: Props) => {
           <Line
             type="monotone"
             dataKey="uniqueCustomers"
-            stroke="hsl(var(--chart-3))"
+            stroke="#3CD856"
             strokeWidth={2}
             dot={false}
             name="Unique Customers"

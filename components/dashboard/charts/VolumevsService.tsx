@@ -50,8 +50,8 @@ function VolumevsService({ className }: Props) {
             iconSize={10}
             wrapperStyle={{ fontSize: "10px", color: "currentColor" }}
           />
-          <Bar dataKey="volume" stackId="a" fill="#8884d8" />
-          <Bar dataKey="service" stackId="a" fill="#82ca9d" />
+          <Bar dataKey="volume" stackId="a" fill="#0095FF" />
+          <Bar dataKey="service" stackId="a" fill="#00E096" />
         </BarChart>
       </ResponsiveContainer>
     </div>

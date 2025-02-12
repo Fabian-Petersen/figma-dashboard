@@ -21,7 +21,7 @@ const DashboardLayout = () => {
           </div>
 
           {/* Grid section */}
-          <main className="p-4">
+          <main className="p-4 bg-[#FAFBFC]">
             <Grid />
           </main>
         </div>

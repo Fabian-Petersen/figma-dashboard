@@ -6,7 +6,7 @@ function UserInfo() {
     <div className="flex gap-3 items-center">
       <div className="rounded-[8px] overflow-hidden">
         <Image
-          src="/images/fabianImage.jpg"
+          src="/images/fabian_image.jpg"
           alt="user-image"
           width={30}
           height={30}
