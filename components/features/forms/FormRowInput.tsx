@@ -68,3 +68,13 @@ const FormRowInput = ({
 };
 
 export default FormRowInput;
+
+// $ Hide Password Functionality
+{
+  /* <div className='relative'>
+      <input onChange={handleChangePassword} className='p-2 rounded-[5px] w-full pr-8 text-darkTextColor dark:text-lightTextColor shadow-small' name='password' type={hidePassword ? 'password' : 'text'} value={password}></input>
+       <button type='button' onClick={() => setHidePassword(!hidePassword)} className='absolute top-1/2 translate-y-[-50%] right-0 my-auto mr-[10px] hover:scale-110 transition duration-200'>
+          {hidePassword ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
+        </button>
+    </div> */
+}

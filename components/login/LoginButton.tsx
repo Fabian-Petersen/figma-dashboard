@@ -1,38 +1,59 @@
 "use client";
 
-import React from "react";
-import { useRouter } from "next/navigation";
+import { useSession, signIn, signOut } from "next-auth/react";
+import Button from "@/components/features/Button";
 
-type LoginButtonProps = {
-  children: React.ReactNode;
-  mode?: "modal" | "redirect";
-  asChild?: boolean;
-};
+// Define the form status type
+type FormStatus = "idle" | "error" | "success";
 
-// $ Login Button Animation
-// const loginVariants = {
-//   hidden: { opacity: 0, y: -100 },
-//   visible: { opacity: 1, y: 0 },
-//   transition: {
-//     duration: 0.8,
-//   },
-// };
+interface LoginButtonProps {
+  formStatus: FormStatus;
+}
 
-const LoginButton = ({ children, mode = "redirect" }: LoginButtonProps) => {
-  const router = useRouter();
+const LoginButton = ({ formStatus }: LoginButtonProps) => {
+  const { data: session, status } = useSession();
 
   const handleLogin = () => {
-    router.push("/login");
+    if (formStatus === "error") {
+      return;
+    }
+    signIn();
   };
 
-  if (mode === "modal") {
-    return <span>TODO:Implement Modal</span>;
+  if (status === "loading") {
+    return (
+      <Button
+        type="button"
+        buttonLabel="Loading..."
+        disabled={true}
+        className="w-full border border-clr_sup_pink text-white tracking-wider px-4 py-2 rounded-lg opacity-50 cursor-not-allowed max-w-28"
+      />
+    );
+  }
+
+  if (session) {
+    return (
+      <Button
+        buttonLabel="Sign Out"
+        onClick={() => signOut()}
+        className="w-full border border-white text-white tracking-wider px-4 py-2 rounded-lg transition-colors max-w-28"
+      />
+    );
   }
 
   return (
-    <span className="cursor-pointer" onClick={handleLogin}>
-      {children}
-    </span>
+    <Button
+      type="submit"
+      disabled={formStatus === "error"}
+      buttonLabel="Sign In"
+      onClick={handleLogin}
+      className={`w-full text-white tracking-wider px-4 py-2 rounded-lg ${
+        formStatus === "error"
+          ? "bg-red-500 cursor-not-allowed"
+          : "bg-clr_primary_landing hover:bg-blue-600"
+      }`}
+    />
   );
 };
+
 export default LoginButton;

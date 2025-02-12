@@ -18,12 +18,13 @@
 - Axios
 - React Query
 - React Hook Form
-- AWS SDK
-- python
+- Python
 - Zod
 - Tailwind CSS
 - Shadcn UI
 - React Icons
+- Next Auth
+- AWS Cognito
 
 Architecture
 
