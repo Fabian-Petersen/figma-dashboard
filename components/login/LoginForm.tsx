@@ -1,13 +1,11 @@
 "use client";
 import FormRowInput from "../features/forms/FormRowInput";
 import { FormEvent } from "react";
-// import LoginButton from "./LoginButton";
 import RegisterButton from "./RegisterButton";
 import { useFormValidation } from "@/app/hooks/useValidateForm";
 import AWSLoginButton from "./LoginButtonAWS";
 import { awsLogin } from "@/app/utils/aws-login";
 import { useRouter } from "next/navigation";
-// import config from "../../config.json";
 
 const LoginForm = () => {
   const {

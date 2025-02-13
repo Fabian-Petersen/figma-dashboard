@@ -2,14 +2,13 @@ import React from "react";
 import Image from "next/image";
 import { useUserAttributes } from "@/app/hooks/useFetchUserAttributes";
 import { Amplify } from "aws-amplify";
-import config from "@/config.json";
 
 // Configure Amplify
 Amplify.configure({
   Auth: {
     Cognito: {
-      userPoolId: config.amplify.userPoolId,
-      userPoolClientId: config.amplify.userPoolClientId,
+      userPoolId: process.env.NEXT_PUBLIC_USERPOOL_ID as string,
+      userPoolClientId: process.env.NEXT_PUBLIC_CLIENT_ID as string,
     },
   },
 });

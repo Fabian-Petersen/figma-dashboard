@@ -1,14 +1,13 @@
 // $ aws amplify user registration function to the application
 
 import { Amplify } from "aws-amplify";
-import config from "@/config.json";
 import { signUp, SignUpOutput } from "aws-amplify/auth";
 
 Amplify.configure({
   Auth: {
     Cognito: {
-      userPoolId: config.amplify.userPoolId,
-      userPoolClientId: config.amplify.userPoolClientId,
+      userPoolId: process.env.NEXT_PUBLIC_USERPOOL_ID as string,
+      userPoolClientId: process.env.NEXT_PUBLIC_CLIENT_ID as string,
     },
   },
 });

@@ -3,7 +3,7 @@
 import React from "react";
 import { signOut } from "aws-amplify/auth";
 import { Amplify } from "aws-amplify";
-import config from "@/config.json";
+
 import { LogOutIcon } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
@@ -12,8 +12,8 @@ import { useRouter } from "next/navigation";
 Amplify.configure({
   Auth: {
     Cognito: {
-      userPoolId: config.amplify.userPoolId,
-      userPoolClientId: config.amplify.userPoolClientId,
+      userPoolId: process.env.NEXT_PUBLIC_USERPOOL_ID as string,
+      userPoolClientId: process.env.NEXT_PUBLIC_CLIENT_ID as string,
     },
   },
 });

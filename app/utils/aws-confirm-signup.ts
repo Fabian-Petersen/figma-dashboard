@@ -1,7 +1,6 @@
 import { confirmSignUp, resendSignUpCode } from "aws-amplify/auth";
 import { useRouter } from "next/navigation";
 import { Amplify } from "aws-amplify";
-import config from "../../config.json";
 
 interface ConfirmSignUpResponse {
   success: boolean;
@@ -11,8 +10,8 @@ interface ConfirmSignUpResponse {
 Amplify.configure({
   Auth: {
     Cognito: {
-      userPoolId: config.amplify.userPoolId,
-      userPoolClientId: config.amplify.userPoolClientId,
+      userPoolId: process.env.NEXT_PUBLIC_USERPOOL_ID as string,
+      userPoolClientId: process.env.NEXT_PUBLIC_CLIENT_ID as string,
     },
   },
 });
