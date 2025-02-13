@@ -6,7 +6,6 @@ import {
   LineChart,
   MessageSquareMoreIcon,
   Settings,
-  LogOutIcon,
 } from "lucide-react";
 
 export type PageLinksTypes = {
@@ -66,13 +65,6 @@ const pageLinkData: PageLinksTypes[] = [
     name: "settings",
     icon: Settings,
     tooltip_content: "settings",
-  },
-  {
-    id: 8,
-    url: "/#sign out",
-    name: "sign out",
-    icon: LogOutIcon,
-    tooltip_content: "signout",
   },
 ];
 

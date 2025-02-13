@@ -1,5 +1,6 @@
 import React from "react";
 import pageLinkData from "@/public/data/pageLinkData";
+import SignOutButton from "./SignOutButton";
 
 function SideBarLinks() {
   return (
@@ -14,6 +15,7 @@ function SideBarLinks() {
             <a href={link.url}>{link.name}</a>
           </li>
         ))}
+        <SignOutButton />
       </ul>
     </>
   );
