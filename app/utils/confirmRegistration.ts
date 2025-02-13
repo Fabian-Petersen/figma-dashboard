@@ -2,7 +2,7 @@
 import { confirmSignUp } from "aws-amplify/auth";
 import { Amplify } from "aws-amplify";
 
-import config from "../../config.json";
+import config from "@/config.json";
 
 Amplify.configure({
   Auth: {

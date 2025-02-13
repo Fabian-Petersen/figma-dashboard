@@ -1,6 +1,6 @@
 // $ aws amplify sign in function to the application
 import { Amplify } from "aws-amplify";
-import config from "../../config.json";
+import config from "@/config.json";
 import { signIn, fetchAuthSession } from "aws-amplify/auth";
 
 Amplify.configure({
