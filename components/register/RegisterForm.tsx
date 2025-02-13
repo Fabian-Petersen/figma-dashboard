@@ -31,10 +31,10 @@ const RegisterForm = () => {
     }
 
     try {
-      console.log("Submitting form with:", {
-        email: formDataObject.email,
-        name: formDataObject.name,
-      });
+      // console.log("Submitting form with:", {
+      //   email: formDataObject.email,
+      //   name: formDataObject.name,
+      // });
 
       const result = await awsSignUp(
         formDataObject.email,

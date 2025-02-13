@@ -1,7 +1,8 @@
+// $ aws amplify user registration function to the application
+
 import { Amplify } from "aws-amplify";
 import config from "../../config.json";
-import { signUp } from "aws-amplify/auth";
-import { SignUpOutput } from "@aws-amplify/auth";
+import { signUp, SignUpOutput } from "aws-amplify/auth";
 
 Amplify.configure({
   Auth: {
@@ -20,7 +21,7 @@ interface SignUpResponse {
 }
 
 // Email validation function
-const isValidEmail = (email: string): boolean => {
+export const isValidEmail = (email: string): boolean => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
 };
@@ -37,24 +38,12 @@ export async function awsSignUp(
       throw new Error("Invalid email format");
     }
 
-    // Generate a unique username
-    const timestamp = new Date().getTime();
-    const randomString = Math.random().toString(36).substring(2, 8);
-    const username = `user_${timestamp}_${randomString}`;
-
-    console.log("Signing up with:", {
-      username,
-      email: trimmedEmail,
-      name,
-    });
-
     const result = await signUp({
-      username,
-      password,
+      username: email,
+      password: password,
       options: {
         userAttributes: {
-          email: trimmedEmail,
-          name,
+          name: name,
         },
         autoSignIn: true, // Enable auto sign-in after successful sign-up
       },

@@ -1,42 +1,35 @@
-import { confirmSignUp, signIn, resendSignUpCode } from "aws-amplify/auth";
+import { confirmSignUp, resendSignUpCode } from "aws-amplify/auth";
 import { useRouter } from "next/navigation";
+import { Amplify } from "aws-amplify";
+import config from "../../config.json";
 
 interface ConfirmSignUpResponse {
   success: boolean;
   message: string;
 }
 
+Amplify.configure({
+  Auth: {
+    Cognito: {
+      userPoolId: config.amplify.userPoolId,
+      userPoolClientId: config.amplify.userPoolClientId,
+    },
+  },
+});
+
 export async function ConfirmSignUp(
   email: string,
-  confirmationCode: string,
-  password: string
+  password: string,
+  confirmationCode: string
 ): Promise<ConfirmSignUpResponse> {
   try {
     const { isSignUpComplete } = await confirmSignUp({
       username: email,
-      confirmationCode,
+      confirmationCode: confirmationCode,
     });
 
     if (isSignUpComplete) {
-      try {
-        const signInResponse = await signIn({
-          username: email,
-          password: password,
-        });
-
-        if (signInResponse.isSignedIn) {
-          return {
-            success: true,
-            message: "Account confirmed and signed in successfully",
-          };
-        }
-      } catch (signInError) {
-        console.error("Error signing in after confirmation:", signInError);
-        return {
-          success: false,
-          message: "Account confirmed but unable to sign in automatically",
-        };
-      }
+      console.log(`SignUp Complete`);
     }
 
     return {
@@ -82,12 +75,19 @@ export async function resendConfirmationCode(
 // Custom hook for handling confirmation and navigation
 export function useConfirmSignUp() {
   const router = useRouter();
-
   const handleConfirmSignUp = async (
     email: string,
     confirmationCode: string,
     password: string
   ) => {
+    console.log(
+      "email:",
+      email,
+      "password:",
+      password,
+      "confirmationCode:",
+      confirmationCode
+    );
     const result = await ConfirmSignUp(email, confirmationCode, password);
 
     if (result.success) {
