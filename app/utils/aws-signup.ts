@@ -1,16 +1,5 @@
 // $ aws amplify user registration function to the application
-
-import { Amplify } from "aws-amplify";
 import { signUp, SignUpOutput } from "aws-amplify/auth";
-
-Amplify.configure({
-  Auth: {
-    Cognito: {
-      userPoolId: process.env.NEXT_PUBLIC_USERPOOL_ID as string,
-      userPoolClientId: process.env.NEXT_PUBLIC_CLIENT_ID as string,
-    },
-  },
-});
 
 interface SignUpResponse {
   success: boolean;

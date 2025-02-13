@@ -1,16 +1,5 @@
 // $ aws amplify sign in function to the application
-import { Amplify } from "aws-amplify";
 import { signIn, fetchAuthSession } from "aws-amplify/auth";
-
-// Configure Amplify
-Amplify.configure({
-  Auth: {
-    Cognito: {
-      userPoolId: process.env.NEXT_PUBLIC_USERPOOL_ID as string,
-      userPoolClientId: process.env.NEXT_PUBLIC_CLIENT_ID as string,
-    },
-  },
-});
 
 export async function awsLogin(userName: string, password: string) {
   const signInResult = await signIn({

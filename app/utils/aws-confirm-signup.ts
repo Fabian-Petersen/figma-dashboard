@@ -1,39 +1,10 @@
 import { confirmSignUp, resendSignUpCode } from "aws-amplify/auth";
 import { useRouter } from "next/navigation";
-import { Amplify } from "aws-amplify";
 
 interface ConfirmSignUpResponse {
   success: boolean;
   message: string;
 }
-
-Amplify.configure({
-  Auth: {
-    Cognito: {
-      userPoolId: process.env.NEXT_PUBLIC_USERPOOL_ID as string,
-      userPoolClientId: process.env.NEXT_PUBLIC_CLIENT_ID as string,
-      loginWith: {
-        // Optional
-        oauth: {
-          domain: process.env.NEXT_PUBLIC_COGNITO_DOMAIN as string,
-          scopes: ["openid email phone profile aws.cognito.signin.user.admin "],
-          redirectSignIn: [
-            "http://localhost:3000/dashboard",
-            "https://dashboard.fabian-portfolio.net/dashboard",
-          ],
-          redirectSignOut: [
-            "http://localhost:3000/",
-            "https://dashboard.fabian-portfolio.net/",
-          ],
-          responseType: "code",
-        },
-        username: false,
-        email: true,
-        phone: false,
-      },
-    },
-  },
-});
 
 export async function ConfirmSignUp(
   email: string,

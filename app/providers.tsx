@@ -4,18 +4,10 @@ import { ToastContainer } from "react-toastify";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "@/components/ui/toaster";
-import { AuthProvider } from "react-oidc-context";
+// import { AuthProvider } from "react-oidc-context";
+import { AmplifyProvider } from "@/aws/AmplifyProvider";
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
-  // $ This code is from AWS Documents when creating a userpool
-  const cognitoAuthConfig = {
-    authority: process.env.NEXT_PUBLIC_AUTHORITY as string,
-    client_id: process.env.NEXT_PUBLIC_CLIENT_ID as string,
-    redirect_uri: process.env.NEXT_PUBLIC_LOGOUT_URI as string,
-    response_type: "code",
-    scope: "phone openid email",
-  };
-
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -28,14 +20,16 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
   });
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthProvider {...cognitoAuthConfig}>
+      <AmplifyProvider>
+        {/* <AuthProvider {...cognitoAuthConfig}> */}
         <AppProvider>
           <Toaster />
           <ToastContainer position="top-center" theme="light" />
           {children}
         </AppProvider>
         <ReactQueryDevtools initialIsOpen={false} />
-      </AuthProvider>
+      </AmplifyProvider>
+      {/* </AuthProvider> */}
     </QueryClientProvider>
   );
 };
