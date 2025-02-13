@@ -1,22 +1,22 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 
-function RegisterButton() {
+function ReturnLoginButton() {
   const router = useRouter();
   return (
     <div className="flex items-center justify-center gap-2 text-xs">
-      <p>Don&apos;t have an account?</p>
+      <p>Already have an account?</p>
       <button
         type="button"
         className="hover:cursor-pointer"
         onClick={() => {
-          router.push("/register");
+          router.push("/login");
         }}
       >
-        <span>Register Here</span>
+        <span>Sign In</span>
       </button>
     </div>
   );
 }
 
-export default RegisterButton;
+export default ReturnLoginButton;

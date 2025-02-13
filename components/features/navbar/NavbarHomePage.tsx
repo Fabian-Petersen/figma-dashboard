@@ -20,7 +20,7 @@ const Navbar = () => {
           {/* Fixed width container for consistent button sizes */}
           <Button
             className="hover:bg-clr_landing_red bg-transparent border-clr_landing_red border text-white tracking-wider px-4 py-2 rounded-lg hover:bg-opacity-90 transition-colors max-w-28 flex-1"
-            onClick={() => router.push("/dashboard")}
+            onClick={() => router.push("/login")}
           >
             Login
           </Button>

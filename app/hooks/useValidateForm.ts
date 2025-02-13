@@ -34,7 +34,7 @@ export const useFormValidation = <T extends FormType>(
   const [formErrors, setFormErrors] = useState<FormErrors>({});
   const [formStatus, setFormStatus] = useState<FormStatus>("idle");
 
-  // Get the appropriate schema based on form type
+  // $ Get the appropriate schema based on form type
   const getSchema = () => {
     switch (formType) {
       case "login":
@@ -46,6 +46,7 @@ export const useFormValidation = <T extends FormType>(
     }
   };
 
+  // $ Validate the form input fields
   const validateForm = (formData: SchemaType<T>): boolean => {
     const schema = getSchema();
     const result = schema.safeParse(formData);
@@ -62,7 +63,7 @@ export const useFormValidation = <T extends FormType>(
       return false;
     }
 
-    // For register form, add additional password match validation
+    // $ For register form, add additional password match validation
     if (formType === "register") {
       const registerData = formData as SchemaType<"register">;
       if (registerData.password !== registerData.confirmPassword) {

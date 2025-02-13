@@ -1,21 +1,25 @@
 "use client";
 import FormRowInput from "../features/forms/FormRowInput";
 import { FormEvent } from "react";
-import { useAuth } from "@/app/hooks/useAuth";
-import LoginButton from "./LoginButton";
+// import LoginButton from "./LoginButton";
 import RegisterButton from "./RegisterButton";
 import { useFormValidation } from "@/app/hooks/useValidateForm";
+import AWSLoginButton from "./LoginButtonAWS";
+import { awsLogin } from "@/app/utils/aws-login";
+import { useRouter } from "next/navigation";
+// import config from "../../config.json";
 
 const LoginForm = () => {
-  const { login } = useAuth();
   const {
     formErrors,
-    formStatus,
+    // formStatus,
     validateForm,
     clearError,
     setFormStatus,
     getInputStyle,
   } = useFormValidation("login");
+
+  const router = useRouter();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -32,8 +36,13 @@ const LoginForm = () => {
     }
 
     try {
-      login(formDataObject);
+      const result = awsLogin(formDataObject.email, formDataObject.password);
+      if (!result) {
+        setFormStatus("error");
+        return;
+      }
       setFormStatus("success");
+      router.push("/dashboard");
     } catch (error) {
       setFormStatus("error");
       console.error("Login error:", error);
@@ -84,7 +93,8 @@ const LoginForm = () => {
           <p className="text-red-500 text-xs">{formErrors.password}</p>
         )}
       </div>
-      <LoginButton formStatus={formStatus} />
+      {/* <LoginButton formStatus={formStatus} /> */}
+      <AWSLoginButton />
       <RegisterButton />
     </form>
   );

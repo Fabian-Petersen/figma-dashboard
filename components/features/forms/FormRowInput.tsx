@@ -17,6 +17,7 @@ type FormRowInputProps = {
   value?: string;
   error?: { message: string };
   disabled?: boolean;
+  autoComplete?: string;
 };
 
 const FormRowInput = ({
@@ -32,6 +33,7 @@ const FormRowInput = ({
   accept,
   error,
   disabled,
+  autoComplete,
 }: FormRowInputProps) => {
   return (
     <div className="relative w-full mb-2 group">
@@ -39,6 +41,7 @@ const FormRowInput = ({
         id={id}
         type={type}
         name={name}
+        autoComplete={autoComplete}
         className={`${className} text-sm py-3 px-2 peer
           outline-none border-none focus:border-b-rose-600 text-fontDark rounded-md
           w-full placeholder-transparent`}

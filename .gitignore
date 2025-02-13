@@ -44,3 +44,6 @@ next-env.d.ts
 # Ignore Python pycache
 /app/lib/pythonScripts/__pycache__/*
 /app/lib/pythonScripts/myenv/*
+
+# aws config file
+config.json

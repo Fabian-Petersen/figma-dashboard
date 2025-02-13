@@ -2,8 +2,21 @@
 
 import { useAuth } from "react-oidc-context";
 
-function AWSLoginButton() {
+function App() {
   const auth = useAuth();
+
+  const signOutRedirect = () => {
+    const clientId = "1v71ojcro3k4bkv5ccrguff2in";
+    const logoutUri = "<logout uri>";
+    const cognitoDomain = "https://<user pool domain>";
+    window.location.href = `${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${encodeURIComponent(
+      logoutUri
+    )}`;
+  };
+
+  if (auth.isLoading) {
+    return <div>Loading...</div>;
+  }
 
   if (auth.error) {
     return <div>Encountering error... {auth.error.message}</div>;
@@ -24,11 +37,10 @@ function AWSLoginButton() {
 
   return (
     <div>
-      <button className="w-full text-white tracking-wider px-4 py-2 rounded-lg bg-clr_primary_landing hover:bg-blue-600">
-        {auth.isLoading ? "loading..." : "Sign Up"}
-      </button>
+      {/* <button onClick={() => auth.signinRedirect()}>Sign in</button> */}
+      <button onClick={() => signOutRedirect()}>Sign out</button>
     </div>
   );
 }
 
-export default AWSLoginButton;
+export default App;
