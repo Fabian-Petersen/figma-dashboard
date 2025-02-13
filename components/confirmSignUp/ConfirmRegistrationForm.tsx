@@ -1,3 +1,9 @@
+"use client";
+
+// $ - This form is used to authenticate the user's email address and validate the input. The form can also be used to resend a verification code to the users email address.
+
+// $ - The Form is rendered in the confirm-signup page.
+
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { confirmRegistration } from "@/app/utils/confirmRegistration";
@@ -6,18 +12,16 @@ import Button from "@/components/features/Button";
 import FormError from "@/components/FormError";
 import FormSuccess from "@/components/FormSuccess";
 import ResendCodeButton from "./ResendCodeButton";
+import { useSearchParams } from "next/navigation";
 
-type ConfirmSignUpProps = {
-  username?: string;
-  password?: string;
-};
-
-const ConfirmSignUpForm = ({ username = "" }: ConfirmSignUpProps) => {
+const ConfirmRegistrationForm = () => {
   const router = useRouter();
   const [code, setCode] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const params = useSearchParams();
+  const username = params.get("email");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -30,6 +34,9 @@ const ConfirmSignUpForm = ({ username = "" }: ConfirmSignUpProps) => {
         throw new Error("Please provide a confirmation code");
       }
 
+      if (!username) {
+        throw new Error("Username is required");
+      }
       const confirmation = confirmRegistration({ username, code });
 
       if (!confirmation) {
@@ -72,7 +79,7 @@ const ConfirmSignUpForm = ({ username = "" }: ConfirmSignUpProps) => {
       <div className="flex justify-left gap-2 items-center w-1/2">
         <Button
           type="submit"
-          className="py-3 px-2 rounded-md tracking-wider uppercase transition-colors duration-200 dark:text-fontLight text-white bg-clr_landing_red hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-[0.8rem] flex-1 h-full"
+          className="py-3 px-2 rounded tracking-wider uppercase transition-colors duration-200 dark:text-fontLight text-white bg-clr_landing_red hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-[0.8rem] flex-1 h-full"
           disabled={isLoading}
           buttonLabel={isLoading ? "Confirming..." : "Confirm Email"}
         />
@@ -84,4 +91,4 @@ const ConfirmSignUpForm = ({ username = "" }: ConfirmSignUpProps) => {
   );
 };
 
-export default ConfirmSignUpForm;
+export default ConfirmRegistrationForm;

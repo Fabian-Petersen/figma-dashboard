@@ -1,3 +1,5 @@
+// $ Component handles the redirect to the registration/signup page from the login form if a user dont have a verified account
+
 import React from "react";
 import { useRouter } from "next/navigation";
 
