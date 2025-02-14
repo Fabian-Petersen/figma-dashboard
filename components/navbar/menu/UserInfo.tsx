@@ -25,12 +25,10 @@ function UserInfo() {
   useEffect(() => {
     const usersName = localStorage.getItem("name");
     const email = localStorage.getItem("email");
-    setEmail(email ? String(email) : "");
+    // $ remove the name from email if user did not sign in for logic purposes
+    setEmail(email ? String(email)?.split("@")[0] : "");
     setUsersName(usersName ? String(usersName) : "");
   }, []);
-
-  // $ remove the name from email if user did not sign in for logic purposes
-  const nameFromEmail = email?.split("@")[0];
 
   return (
     <div className="flex gap-3 items-center">
@@ -44,7 +42,7 @@ function UserInfo() {
       </div>
       <div className="flex flex-col justify-center">
         <p className="text-clr_blueGray_900 text-[14px] font-semibold capitalize">
-          {usersName || nameFromEmail}
+          {usersName || email}
           {/* {userAttributes?.name} */}
         </p>
         <p className="text-clr_blueGray_700 text-[12px]">Admin</p>
