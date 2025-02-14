@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 // import { useUserAttributes } from "@/app/hooks/useFetchUserAttributes";
 // import { Amplify } from "aws-amplify";
@@ -14,11 +16,19 @@ import Image from "next/image";
 // });
 
 function UserInfo() {
+  const [email, setEmail] = useState("");
+  const [usersName, setUsersName] = useState("");
   //$ Retrieve the name attribute from Cognito
   // const { userAttributes } = useUserAttributes();
 
-  const usersName = localStorage.getItem("name");
-  const email = localStorage.getItem("email");
+  // $ Get the users details from localstorage
+  useEffect(() => {
+    const usersName = localStorage.getItem("name");
+    const email = localStorage.getItem("email");
+    setEmail(email ? String(email) : "");
+    setUsersName(usersName ? String(usersName) : "");
+  }, []);
+
   // $ remove the name from email if user did not sign in for logic purposes
   const nameFromEmail = email?.split("@")[0];
 
