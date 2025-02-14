@@ -1,17 +1,30 @@
 // $ aws amplify sign in function to the application
-import { signIn, fetchAuthSession } from "aws-amplify/auth";
+// import { signIn, fetchAuthSession } from "aws-amplify/auth";
 
 export async function awsLogin(userName: string, password: string) {
-  const signInResult = await signIn({
-    username: userName,
-    password: password,
-  });
-  const session = await fetchAuthSession();
-  const username = session.tokens?.accessToken?.payload;
+  localStorage.setItem("email", userName);
+  try {
+    console.log(
+      "inputs for signIn()",
+      "userName:",
+      userName,
+      "password:",
+      password
+    );
+    // $ Attempt Sign In of User
+    // const signInResult = await signIn({
+    //   username: userName,
+    //   password: password,
+    // });
 
-  if (username) {
-    // sessionStorage.setItem("username", JSON.stringify(username));
+    // if (signInResult.isSignedIn) {
+    //   const session = await fetchAuthSession();
+    //   console.log(session);
+    // }
+
+    // return signInResult;
+  } catch (error) {
+    console.error("Login error:", error);
+    throw error;
   }
-  console.log("session:", session);
-  return signInResult;
 }

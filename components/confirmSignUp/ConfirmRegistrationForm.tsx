@@ -4,55 +4,83 @@
 
 // $ - The Form is rendered in the confirm-signup page.
 
-import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { confirmRegistration } from "@/app/utils/confirmRegistration";
+import { useState } from "react";
 import FormRowInput from "@/components/features/forms/FormRowInput";
 import Button from "@/components/features/Button";
-import FormError from "@/components/FormError";
-import FormSuccess from "@/components/FormSuccess";
+// import FormError from "@/components/FormError";
+// import FormSuccess from "@/components/FormSuccess";
 import ResendCodeButton from "./ResendCodeButton";
-import { useSearchParams } from "next/navigation";
+import { FormEvent } from "react";
+import { useToast } from "@/hooks/use-toast";
 
 const ConfirmRegistrationForm = () => {
-  const router = useRouter();
   const [code, setCode] = useState("");
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const params = useSearchParams();
-  const username = params.get("email");
+  const router = useRouter();
+  const { toast } = useToast();
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsLoading(true);
-    setError("");
-    setSuccess("");
 
-    try {
-      if (!code) {
-        throw new Error("Please provide a confirmation code");
-      }
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const formDataObject = {
+      code: formData.get("code") as string,
+    };
 
-      if (!username) {
-        throw new Error("Username is required");
-      }
-      const confirmation = confirmRegistration({ username, code });
-
-      if (!confirmation) {
-        setSuccess("Registration Failed");
-      }
-
-      setSuccess("Email confirmed successfully!");
-      setTimeout(() => {
-        router.push("/login");
-      }, 2000);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to confirm signup");
-    } finally {
+    //$ Direct to the confirm email form.
+    if (formDataObject.code) {
       setIsLoading(false);
+      router.push("/dashboard");
+    } else {
+      toast({
+        variant: "destructive",
+        title: "No Code Provided!",
+        description: "Please Provide a Valid Code",
+        duration: 3000,
+      });
     }
+    return;
   };
+
+  // $ aws amplify cognito signin logic
+  // import { useSearchParams } from "next/navigation";
+  // const params = useSearchParams();
+  // const [error, setError] = useState("");
+  // const [success, setSuccess] = useState("");
+  // const username = params.get("email");
+  // import { confirmRegistration } from "@/app/utils/confirmRegistration";
+  // const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   setIsLoading(true);
+  //   setError("");
+  //   setSuccess("");
+
+  //   try {
+  //     if (!code) {
+  //       throw new Error("Please provide a confirmation code");
+  //     }
+
+  //     if (!username) {
+  //       throw new Error("Username is required");
+  //     }
+  //     const confirmation = confirmRegistration({ username, code });
+
+  //     if (!confirmation) {
+  //       setSuccess("Registration Failed");
+  //     }
+
+  //     setSuccess("Email confirmed successfully!");
+  //     setTimeout(() => {
+  //       router.push("/login");
+  //     }, 2000);
+  //   } catch (err) {
+  //     setError(err instanceof Error ? err.message : "Failed to confirm signup");
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
 
   return (
     <form
@@ -85,8 +113,8 @@ const ConfirmRegistrationForm = () => {
         />
         <ResendCodeButton className="py-3 px-2 rounded-md tracking-wider uppercase transition-colors duration-200 dark:text-fontLight hover:bg-blue-500 hover:text-white border border-blue-500 text-clr_blueGray_700disabled:bg-gray-400 text-[0.8rem] flex-1" />
       </div>
-      <FormError message={error} />
-      <FormSuccess message={success} />
+      {/* <FormError message={error} /> */}
+      {/* <FormSuccess message={success} /> */}
     </form>
   );
 };

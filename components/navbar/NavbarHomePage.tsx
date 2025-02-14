@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import Button from "../Button";
+import Button from "@/components/features/Button";
 import { fetchAuthSession } from "aws-amplify/auth";
 import { Loader2 } from "lucide-react";
 

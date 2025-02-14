@@ -61,6 +61,7 @@ const VisitorInsights = ({ className }: Props) => {
             strokeWidth={2}
             dot={true}
             name="Last Month"
+            fill="#0095FF40"
           />
           <Area
             type="monotone"
@@ -68,6 +69,7 @@ const VisitorInsights = ({ className }: Props) => {
             stroke="#07E098"
             strokeWidth={2}
             dot={true}
+            fill="#07E09840"
             name="This Month"
           />
         </AreaChart>

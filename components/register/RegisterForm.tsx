@@ -3,12 +3,12 @@ import FormRowInput from "../features/forms/FormRowInput";
 import { FormEvent } from "react";
 import ReturnLoginButton from "./ReturnLoginButton";
 import { useFormValidation } from "@/app/hooks/useValidateForm";
-import RegisterButton from "./RegisterButton";
-import { awsSignUp } from "@/app/utils/aws-signup";
+import RegisterFormButton from "./RegisterFormButton";
 import { useRouter } from "next/navigation";
-// import config from "../../config.json";
+// import { SignUp } from "@/app/utils/aws-signup";
 
 const RegisterForm = () => {
+  //$ Validate the form entries with the registerFormSchema using zod
   const { formErrors, validateForm, clearError, setFormStatus, getInputStyle } =
     useFormValidation("register");
 
@@ -26,37 +26,42 @@ const RegisterForm = () => {
       confirmPassword: formData.get("confirmPassword") as string,
     };
 
-    if (!validateForm(formDataObject)) {
+    // $ Save the user's name to localStorage to be used in Dashboard. This will be retrieved from Cognito later.
+    localStorage.setItem("name", formDataObject.name);
+
+    //$ Direct to the confirm email form.
+    if (validateForm(formDataObject)) {
+      router.push("/confirm-signup");
+      setFormStatus("error");
       return;
     }
-
-    try {
-      // console.log("Submitting form with:", {
-      //   email: formDataObject.email,
-      //   name: formDataObject.name,
-      // });
-
-      const result = await awsSignUp(
-        formDataObject.email,
-        formDataObject.password,
-        formDataObject.name
-      );
-
-      if (result.success) {
-        // Redirect to confirmation page with credentials
-        const params = new URLSearchParams({
-          email: formDataObject.email,
-          password: formDataObject.password,
-        });
-        router.push(`/confirm-signup?${params.toString()}`);
-      } else {
-        setFormStatus("error");
-      }
-    } catch (error) {
-      setFormStatus("error");
-      console.error("Registration error:", error);
-    }
   };
+
+  // $  ==================== AWS SignUp Form Code using Cognito ====================
+  // import { awsSignUp } from "@/app/utils/aws-signup";
+  // import { useRouter } from "next/navigation";
+  // try {
+  //   const result = await awsSignUp(
+  //     formDataObject.email,
+  //     formDataObject.password,
+  //     formDataObject.name
+  //   );
+
+  //   if (result.success) {
+  //     // Redirect to confirmation page with credentials
+  //     const params = new URLSearchParams({
+  //       email: formDataObject.email,
+  //       password: formDataObject.password,
+  //     });
+  //     router.push(`/confirm-signup?${params.toString()}`);
+  //   } else {
+  //     setFormStatus("error");
+  //   }
+  // } catch (error) {
+  //   setFormStatus("error");
+  //   console.error("Registration error:", error);
+  // }
+  // };
 
   return (
     <form
@@ -137,7 +142,7 @@ const RegisterForm = () => {
           <p className="text-red-500 text-xs">{formErrors.confirmPassword}</p>
         )}
       </div>
-      <RegisterButton />
+      <RegisterFormButton />
       <ReturnLoginButton />
     </form>
   );

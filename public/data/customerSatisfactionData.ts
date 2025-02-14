@@ -8,37 +8,37 @@ const customerSatisfactionData: SaleInsightDataTypes[] = [
   {
     name: "1",
     lastMonth: 280,
-    thisMonth: 320,
+    thisMonth: 580,
   },
   {
     name: "2",
-    lastMonth: 300,
-    thisMonth: 280,
+    lastMonth: 350,
+    thisMonth: 400,
   },
   {
     name: "3",
-    lastMonth: 340,
-    thisMonth: 325,
+    lastMonth: 100,
+    thisMonth: 450,
   },
   {
     name: "4",
-    lastMonth: 320,
-    thisMonth: 380,
+    lastMonth: 120,
+    thisMonth: 350,
   },
   {
     name: "5",
-    lastMonth: 360,
-    thisMonth: 340,
+    lastMonth: 180,
+    thisMonth: 480,
   },
   {
     name: "6",
-    lastMonth: 380,
+    lastMonth: 170,
     thisMonth: 290,
   },
   {
     name: "7",
-    lastMonth: 320,
-    thisMonth: 310,
+    lastMonth: 250,
+    thisMonth: 590,
   },
 ];
 

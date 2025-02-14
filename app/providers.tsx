@@ -1,36 +1,28 @@
 import React from "react";
 import AppProvider from "./useGlobalContext";
+// import { AuthProvider } from "@/app/contexts/AuthContext";
 import { ToastContainer } from "react-toastify";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "@/components/ui/toaster";
 // import { AuthProvider } from "react-oidc-context";
-import { AmplifyProvider } from "@/aws/AmplifyProvider";
+// import { AmplifyProvider } from "@/aws/AmplifyProvider";
+
+// const cognitoAuthConfig = {
+//   authority:
+//     "https://cognito-idp.af-south-1.amazonaws.com/af-south-1_CpoG8Y5t7",
+//   client_id: "6vs08ph8gj9co8cc4cob6rn6d4",
+//   redirect_uri: "https://dashboard.fabian-portfolio.net",
+//   response_type: "code",
+//   scope: "email openid phone",
+// };
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        staleTime: 1000 * 60 * 60, // Data will not be considered stale for 1 hour
-        refetchOnWindowFocus: false, // Prevent refetching when the window is focused
-        refetchOnReconnect: false, // Prevent refetching when the connection is restored
-        refetchOnMount: false, // Prevent refetching when a component mounts } },
-      },
-    },
-  });
   return (
-    <QueryClientProvider client={queryClient}>
-      <AmplifyProvider>
-        {/* <AuthProvider {...cognitoAuthConfig}> */}
-        <AppProvider>
-          <Toaster />
-          <ToastContainer position="top-center" theme="light" />
-          {children}
-        </AppProvider>
-        <ReactQueryDevtools initialIsOpen={false} />
-      </AmplifyProvider>
-      {/* </AuthProvider> */}
-    </QueryClientProvider>
+    // <AuthProvider {...cognitoAuthConfig}></AuthProvider>
+    <AppProvider>
+      <Toaster />
+      <ToastContainer position="top-center" theme="light" />
+      {children}
+    </AppProvider>
   );
 };
 export default Providers;

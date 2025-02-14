@@ -1,47 +1,10 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { getCurrentUser } from "aws-amplify/auth";
-
 import React from "react";
-import Navbar from "@/components/features/navbar/Navbar";
+import Navbar from "@/components/navbar/Navbar";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import Grid from "@/components/dashboard/Grid";
 
 const DashboardLayout = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const router = useRouter();
-
-  useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const user = await getCurrentUser();
-        setIsAuthenticated(!!user);
-      } catch (error) {
-        console.error("Auth error:", error);
-        router.push("/login");
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    checkAuth();
-  }, [router]);
-
-  if (isLoading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"></div>
-      </div>
-    );
-  }
-
-  if (!isAuthenticated) {
-    return null;
-  }
-
+  // $ Invoke the protected route hook
   return (
     <div className="w-full min-h-screen bg-gray-50">
       {/* Main grid container */}
