@@ -70,7 +70,7 @@ const LoginForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="max-w-[25rem] w-[20rem] flex flex-col mx-auto p-4 gap-6 outline-none rounded-md shadow-md shadow-gray-400 dark:shadow-gray-800 bg-gray-100 dark:bg-gray-800"
+      className="max-w-[25rem] w-[20rem] flex flex-col mx-auto p-4 gap-6 outline-none rounded-md shadow-md shadow-clr_primary_200 bg-gray-100 dark:bg-gray-800"
     >
       <h2 className="py-2 font-semibold text-gray-600 dark:text-white tracking-[2px] capitalize text-clampH2">
         Login
@@ -112,7 +112,7 @@ const LoginForm = () => {
         )}
       </div>
       {/* <LoginButton formStatus={formStatus} /> */}
-      <button className="w-full text-white tracking-wider px-4 py-2 rounded-lg bg-clr_primary_landing hover:bg-blue-600">
+      <button className="w-full text-white tracking-wider px-4 py-2 rounded-lg bg-clr_landing_red hover:bg-blue-600">
         {/* {isLoading ? "loading..." : "Sign In"} */}
         Sign In
       </button>

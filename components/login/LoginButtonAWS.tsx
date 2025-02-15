@@ -11,7 +11,7 @@ function AWSLoginButton() {
 
   return (
     <div>
-      <button className="w-full text-white tracking-wider px-4 py-2 rounded-lg bg-clr_primary_landing hover:bg-blue-600">
+      <button className="w-full text-white tracking-wider px-4 py-2 rounded-lg bg-clr_landing_red hover:bg-blue-600">
         {auth.isLoading ? "loading..." : "Sign In"}
       </button>
     </div>

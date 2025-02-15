@@ -6,11 +6,11 @@
 @tailwind utilities;
 
 :root {
-  --navbar-height: 4rem;
+  --navbar-height: 2.5rem;
 }
 
 body {
-  font-family: "Poppins", sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 @layer base {
@@ -67,6 +67,14 @@ body {
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
   }
+}
+
+.clipPathRed {
+  clip-path: polygon(100% 70%, 0 100%, 100% 100%);
+}
+
+.clipPathWhite {
+  clip-path: polygon(0 96%, 100% 82%, 100% 100%, 0% 100%);
 }
 
 @layer base {

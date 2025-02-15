@@ -13,6 +13,8 @@ const config: Config = {
       darkMode: "class",
       fontSize: {
         clampText: "clamp(0.5rem, 0.6vw, 0.8rem)",
+        clampNavMenuText: "clamp(0.8rem, 2vw, 1rem)",
+        clampMobileHeading: "clamp(1.5rem, 5vw, 2.3rem)",
         clamp_landingPage: "clamp(3.5rem, 5vw, 5rem)",
         clampH2: "clamp(1.5rem, 3vw, 1.75rem)",
         clampH3: "clamp(1rem, 2vw, 1.3rem)",
