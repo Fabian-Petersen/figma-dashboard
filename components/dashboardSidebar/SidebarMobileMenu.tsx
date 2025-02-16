@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useNav } from "@/app/contexts/MenuToggleContext";
-import pageLinkData from "@/out/data/pageLinkData";
+import pageLinkData from "@/public/data/pageLinkData";
 import { LogOutIcon } from "lucide-react";
 import Link from "next/link";
 
