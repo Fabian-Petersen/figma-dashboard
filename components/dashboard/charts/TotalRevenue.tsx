@@ -23,7 +23,7 @@ const TotalRevenue = ({ className }: Props) => {
       className={`flex flex-col rounded-lg p-4 border border-clr_blueGray_400 shadow-md gap-4 ${className}`}
     >
       <ChartHeading title="Total Revenue" />
-      <ResponsiveContainer width="100%" height={180}>
+      <ResponsiveContainer width="100%">
         <BarChart
           data={totalRevenueData}
           margin={{

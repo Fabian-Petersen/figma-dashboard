@@ -47,12 +47,17 @@ const SignOutButton = () => {
   };
 
   return (
-    <li className="tracking-wider flex items-center gap-4 justify-start hover:cursor-pointer hover:bg-clr_primary_900 py-4 px-4 hover:text-white hover:rounded-lg">
-      <LogOutIcon />
+    <li className="tracking-wider flex items-center gap-4 justify-start hover:cursor-pointer lg:hover:bg-clr_primary_900 py-4 px-4 mx-auto lg:mx-0 hover:lg:text-white hover:rounded-lg">
+      <button
+        onClick={handleSignOut}
+        className="hover:text-clr_primary_900 lg:hover:text-white"
+      >
+        <LogOutIcon />
+      </button>
       <button
         type="button"
         onClick={handleSignOut}
-        className="w-full text-left"
+        className="w-full text-left hidden lg:block"
       >
         Sign Out
       </button>

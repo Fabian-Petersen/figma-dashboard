@@ -3,9 +3,15 @@ import React from "react";
 import LogoSidebar from "./LogoSidebar";
 import SideBarLinks from "./SideBarLinks";
 
-const Sidebar = () => {
+type SidebarProps = {
+  className?: string;
+};
+
+const Sidebar = ({ className }: SidebarProps) => {
   return (
-    <aside className="h-screen w-full bg-white flex flex-col gap-8 pt-14 border-none">
+    <aside
+      className={`${className} hidden bg-white sm:flex flex-col gap-8 px-4`}
+    >
       <LogoSidebar />
       <SideBarLinks />
     </aside>

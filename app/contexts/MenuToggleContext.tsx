@@ -6,12 +6,16 @@ import { createContext, useContext, useState, ReactNode } from "react";
 interface NavContextType {
   openNav: boolean;
   setOpenNav: React.Dispatch<React.SetStateAction<boolean>>;
+  openSidebar: boolean;
+  setOpenSidebar: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 // Create the context with a default value
 const NavContext = createContext<NavContextType>({
   openNav: false,
+  openSidebar: false,
   setOpenNav: () => {},
+  setOpenSidebar: () => {},
 });
 
 // Define props type for the provider component
@@ -22,9 +26,12 @@ interface NavProviderProps {
 // Create the provider component
 export const NavProvider: React.FC<NavProviderProps> = ({ children }) => {
   const [openNav, setOpenNav] = useState<boolean>(false);
+  const [openSidebar, setOpenSidebar] = useState<boolean>(false);
 
   return (
-    <NavContext.Provider value={{ openNav, setOpenNav }}>
+    <NavContext.Provider
+      value={{ openNav, setOpenNav, openSidebar, setOpenSidebar }}
+    >
       {children}
     </NavContext.Provider>
   );
