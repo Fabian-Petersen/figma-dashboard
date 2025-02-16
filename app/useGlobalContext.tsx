@@ -25,6 +25,17 @@ export type T = {
   setProjectType: Dispatch<SetStateAction<string>>;
 };
 
+// const initialState: T = {
+//   navOpen: false,
+//   setNavOpen: () => {},
+//   theme: "light",
+//   setTheme: () => {},
+//   isDarkTheme: false,
+//   setIsDarkTheme: () => {},
+//   projectType: "all",
+//   setProjectType: () => {},
+// };
+
 // $ Step 1: Create the context
 // % The ThemeContext type takes in the ThemeContext type or null
 export const AppContext = createContext<T | undefined>(undefined);

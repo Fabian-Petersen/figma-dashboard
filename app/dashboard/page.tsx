@@ -1,6 +1,6 @@
 import React from "react";
-import Navbar from "@/components/navbar/Navbar";
-import Sidebar from "@/components/Sidebar/Sidebar";
+import Navbar from "@/components/navbar/navbarDashboard/Navbar";
+import Sidebar from "@/components/dasbboardSidebar/Sidebar";
 import Grid from "@/components/dashboard/Grid";
 
 const DashboardLayout = () => {

@@ -70,7 +70,7 @@ const LoginForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="max-w-[25rem] w-[20rem] flex flex-col mx-auto p-4 gap-6 outline-none rounded-md shadow-md shadow-clr_primary_200 bg-gray-100 dark:bg-gray-800"
+      className="max-w-[25rem] w-[23rem] flex flex-col mx-auto p-4 gap-6 outline-none rounded-md shadow-md shadow-clr_primary_200 bg-gray-100 dark:bg-gray-800"
     >
       <h2 className="py-2 font-semibold text-gray-600 dark:text-white tracking-[2px] capitalize text-clampH2">
         Login

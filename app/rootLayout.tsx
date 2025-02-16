@@ -2,7 +2,7 @@
 // $ Layout for the whole app, including the navbar.
 // import Navbar from "@/components/navbar/navbarDesktop/NavbarHomePage";
 import MobileNavbar from "@/components/navbar/navbarMobile/MobileNavbar";
-import NavbarDesktop from "@/components/navbar/navbarDesktop/NavbarHomePage";
+import NavbarHomePage from "@/components/navbar/navbarDesktop/NavbarHomePage";
 
 // $ Context Providers
 import Providers from "./providers";
@@ -20,7 +20,7 @@ export default function RootLayout({ children }: Props) {
       <body className="bg-bgLight dark:bg-bgDark">
         <Providers>
           <NavProvider>
-            {isMobile ? <MobileNavbar /> : <NavbarDesktop />}
+            {isMobile ? <MobileNavbar /> : <NavbarHomePage />}
             {children}
           </NavProvider>
         </Providers>
