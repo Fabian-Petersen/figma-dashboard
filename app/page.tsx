@@ -1,6 +1,5 @@
 import LargeFeature from "@/components/landingPage/features/LargeFeature";
 import SmallFeautre from "@/components/landingPage/features/SmallFeautre";
-
 import MainContent from "@/components/landingPage/MainContent";
 
 export default function Home() {

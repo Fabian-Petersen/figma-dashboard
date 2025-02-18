@@ -5,7 +5,7 @@ export default function SmallFeautre() {
   return (
     <div className="absolute h-auto -left-[100] -top-[100] sm:-top[261] z-[-1]">
       <Image
-        src="/images/landingPage/small_substract.svg"
+        src="/images/landingPage/small_substract.png"
         alt="decorative subtract element"
         width={660}
         height={660}

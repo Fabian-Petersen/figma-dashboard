@@ -10,7 +10,7 @@ const MobileMenuButton = () => {
   return (
     <button
       onClick={() => setOpenSidebar(!openSidebar)}
-      className="text-white pr-4 sm:hidden"
+      className="text-white pr-4 lg:hidden"
     >
       <MenuIcon size={24} className="text-clr_blueGray_800" />
     </button>

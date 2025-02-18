@@ -1,3 +1,5 @@
+# $ The deployment file for the project to AWS.
+
 name: Deploy Dashboard Project
 on:
   push:

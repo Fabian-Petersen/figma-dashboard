@@ -1,6 +1,6 @@
 import * as z from "zod";
 
-// $ Schema for the Login Form
+// $ Schema for the Login and Register Form
 export const loginSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email address" }),
   password: z
@@ -40,14 +40,9 @@ export const RegisterFormSchema = z.object({
     .min(1, {
       message: "Please ensure the passwords match",
     })
-    .refine(
-      (value) =>
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/g.test(
-          value
-        ),
-      {
-        message:
-          "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character (@$!%*?&)",
-      }
+    .refine((value) =>
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/g.test(
+        value
+      )
     ),
 });

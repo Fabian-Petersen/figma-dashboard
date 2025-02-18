@@ -10,7 +10,7 @@ import Sidebar from "../dashboardSidebar/Sidebar";
 import SidebarMobileMenu from "../dashboardSidebar/SidebarMobileMenu";
 
 function DashboardMainComponent() {
-  const isMobile = useScreenSize(640);
+  const isMobile = useScreenSize(768);
   return isMobile ? (
     <div className="grid grid-cols-1 grid-rows-[4rem_1fr] h-auto p-2 gap-4">
       <SidebarMobileMenu />
@@ -18,10 +18,10 @@ function DashboardMainComponent() {
     </div>
   ) : (
     // $ Set the layout for the dashboard page, 1 column for the sidebar, spanning all rows with a max width of 15rem. The navbar span full width in the first row. The grid start on row 2 and span the rest of the space.
-    <div className="grid grid-cols-[minmax(10rem,15rem)_1fr] grid-rows-[(3rem_repeat(3,1fr)] min-h-screen">
+    <div className="grid grid-cols-[minmax(10rem,15rem)_1fr] grid-rows-[(3rem_repeat(3,1fr)] min-h-screen xl:px-10">
       <NavbarDashboard className="col-start-2 row-end-1 max-w-7xl" />
       <Sidebar className="col-start-1 row-start-1 row-span-4" />
-      <Grid className="col-start-2 col-span-4 row-start-2 row-span-full max-w-7xl pr-10" />
+      <Grid className="col-start-2 col-span-4 row-start-2 row-span-full max-w-7xl xl:px-10" />
     </div>
   );
 }

@@ -1,15 +1,18 @@
 ## Project Objectives
 
-- Build dashboard and Landing Page from Figma Design templates, source hhtps://figma.com/community
-- Create login page with input fields "username" and "password"
-- Create register page with input fields "name", "username", "password", "confirm "password" and "avatar image"
-- Setup aws cognito to handle authentication (I had to use Clerk as a last minute alternative, the Nextjs and AWS documentation does not provide setup with Nextjs 15). Some homework for me _smiley face_
-- Display the users "name" on the dashboard
-- Create graphs using recharts
-- Handle the form validation using zod
-- Create DynamoDB database to store mock sales data for the graphs (data from claude.ai)
-- Create API Gateway to handle the https requests to the backend
-- Create lambda function with python runtime to handle incoming events
+- Create a Landing Page for the application.
+- Create a login page with input fields "username" and "password".
+  Create a register page with input fields "name", "email", "password", "confirm "password".
+- Create a confirmation page to verify a user’s registration after signup. This functionality is not active at the moment for demo and security reasons.
+- Create a dashboard page.
+- Display the users "name" on the dashboard.
+- Add logic to the signout button on the sidebar to sign users out and redirect to the home page.
+- Create graphs using recharts.
+- Handle the form validation using zod.
+- Create API Gateway to handle the private requests to the backend.
+- Create lambda function with python runtime to handle incoming events to private services
+- Host site on AWS S3 with Cloudfront Distribution “https://dashboard.fabian-portfolio.net”
+- Manage SSL certificates with ACM (Amazon Certificate Manager)
 
 # Exceptions
 
@@ -24,17 +27,16 @@
 
 - Nextjs
 - Typescript
-- Axios
-- React Query
 - React Hook Form
 - Python
 - Zod
 - Tailwind CSS
 - Shadcn UI
+- Framer Motion
+- Github and Github Actions for deployment to AWS
 - React Icons
-- Next Auth
-- AWS Cognito
-- Clerk Authentication
+- React Toastify
+- AWS Services : Cognito, Amplify, Cloudfront, ACM, Lambda, API Gateway, S3 bucket, Route 53.
 
 Architecture
 

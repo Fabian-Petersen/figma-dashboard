@@ -8,7 +8,7 @@ import useScreenSize from "@/app/hooks/useScreenSize";
 import MobileMenuButton from "../navbarMobile/MobileMenuButton";
 import { usePathname } from "next/navigation";
 const NavbarHomePage = () => {
-  const isMobile = useScreenSize(640);
+  const isMobile = useScreenSize(768);
   const path = usePathname();
 
   return path === "/dashboard/" ? null : (

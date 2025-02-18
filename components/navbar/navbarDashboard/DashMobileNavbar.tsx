@@ -8,7 +8,7 @@ import Menu from "./menu/Menu";
 
 const DashMobileNavbar = () => {
   return (
-    <div className="fixed top-0 flex justify-between items-center p-4 shadow-md h-[4rem] sm:hidden w-full bg-white z-[1000]">
+    <div className="fixed top-0 flex justify-between items-center p-4 shadow-md h-[4rem] w-full bg-white z-[1000] lg:hidden">
       <div className="flex items-center gap-4">
         <LogoSidebar />
         <MobileMenuButton />

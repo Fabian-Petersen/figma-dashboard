@@ -1,3 +1,5 @@
+// $ This components renders the links for the sidebar, the data is from the pageLinkData file.
+
 import React from "react";
 import pageLinkData from "@/public/data/pageLinkData";
 import SignOutButton from "./SignOutButton";

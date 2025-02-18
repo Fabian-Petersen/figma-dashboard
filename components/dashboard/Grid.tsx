@@ -19,8 +19,12 @@ const Grid = ({ className }: GridProps) => {
     <div className={`${className} w-full space-y-4 h-auto`}>
       {/* // $ Top row - Sales and Visitor charts */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[minmax(600px,2fr)_minmax(400px,1fr)] gap-4">
-        <SalesChart className={`${defaultClasses}`} />
-        <VisitorInsights className={`${defaultClasses}`} />
+        <SalesChart
+          className={`${defaultClasses} sm:col-span-2 md:col-span-1`}
+        />
+        <VisitorInsights
+          className={`${defaultClasses} col-span-2 md:col-span-1`}
+        />
       </div>
 
       {/* // $ Bottom grid - Responsive stacking */}

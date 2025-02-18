@@ -1,3 +1,5 @@
+// $ This function handles the registration to Cognito with Amplify
+
 import { confirmSignUp, resendSignUpCode } from "aws-amplify/auth";
 import { useRouter } from "next/navigation";
 

@@ -13,7 +13,7 @@ type NavbarProps = {
 };
 
 const NavbarDashboard = ({ className }: NavbarProps) => {
-  const isMobile = useScreenSize(640);
+  const isMobile = useScreenSize(768);
   return isMobile ? (
     <DashMobileNavbar />
   ) : (
