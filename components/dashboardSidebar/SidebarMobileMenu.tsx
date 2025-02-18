@@ -15,7 +15,7 @@ function SidebarMobileMenu() {
       animate={{ x: openSidebar ? "-100%" : "0%" }}
       exit={{ x: "100%" }}
       transition={{ type: "tween", duration: 0.3 }}
-      className="fixed left-0 top-[4rem] h-full w-64 bg-white shadow-lg flex flex-col gap-6 py-6 px-8 z-[1000] sm:hidden"
+      className="fixed left-0 top-[4rem] h-full w-[65%] sm:w-[35%] bg-white shadow-lg flex flex-col gap-6 py-6 px-8 z-[1000] lg:hidden"
     >
       <nav className="flex flex-col gap-10 py-6">
         {pageLinkData.map((link) => (

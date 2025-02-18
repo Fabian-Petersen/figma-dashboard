@@ -6,11 +6,11 @@ import { useNav } from "@/app/contexts/MenuToggleContext";
 
 const MobileMenuButton = () => {
   const { openSidebar, setOpenSidebar } = useNav();
-  console.log("openSidebar from MobileMenuButton:", openSidebar);
+  // console.log("openSidebar from MobileMenuButton:", openSidebar);
   return (
     <button
       onClick={() => setOpenSidebar(!openSidebar)}
-      className="text-white pr-4 lg:hidden"
+      className="text-white pr-4 md:hidden"
     >
       <MenuIcon size={24} className="text-clr_blueGray_800" />
     </button>

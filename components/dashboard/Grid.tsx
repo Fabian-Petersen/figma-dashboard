@@ -16,9 +16,9 @@ const Grid = ({ className }: GridProps) => {
   const defaultClasses =
     "rounded-lg p-4 border border-clr_blueGray_400 shadow-md h-[250px]";
   return (
-    <div className={`${className} w-full space-y-4 h-auto`}>
+    <div className={`${className} w-full space-y-4 h-auto overflow-hidden`}>
       {/* // $ Top row - Sales and Visitor charts */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[minmax(600px,2fr)_minmax(400px,1fr)] gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[minmax(300px,1fr)_minmax(300px,1fr)] gap-4">
         <SalesChart
           className={`${defaultClasses} sm:col-span-2 md:col-span-1`}
         />
@@ -29,7 +29,7 @@ const Grid = ({ className }: GridProps) => {
 
       {/* // $ Bottom grid - Responsive stacking */}
       <div className="grid gap-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-[minmax(400px,1.5fr)_minmax(300px,1fr)_minmax(300px,1fr)] auto-rows-fr gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-[minmax(250px,1fr)_minmax(0px,1fr)_minmax(250px,1fr)] auto-rows-fr gap-4">
           <TotalRevenue className={`${defaultClasses}`} />
           <CustomerSatisfaction className={`${defaultClasses}`} />
           <TargetvReality className={`${defaultClasses}`} />

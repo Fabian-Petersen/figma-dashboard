@@ -1,5 +1,6 @@
 import React from "react";
 import { SquareStack } from "lucide-react";
+
 const LogoSidebar = () => {
   return (
     <div className="bg-white flex items-center justify-center lg:justify-start gap-4 sm:px-4 lg:w-[252px]">

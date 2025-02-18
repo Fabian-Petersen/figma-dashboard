@@ -18,7 +18,7 @@ const NavbarDashboard = ({ className }: NavbarProps) => {
     <DashMobileNavbar />
   ) : (
     <nav className={`${className}`}>
-      <div className="h-[4rem] w-full flex justify-between items-center">
+      <div className="h-[4rem] w-full lg:flex justify-between items-center hidden">
         <Logo variant="navbar" />
         <div className="py-4 bg-white flex items-center gap-4 ml-auto pr-10">
           <SearchBar />
