@@ -23,7 +23,7 @@ const VisitorInsights = ({ className }: Props) => {
       className={`${className} flex flex-col rounded-lg p-4 shadow-md gap-4 h-auto`}
     >
       <ChartHeading title="Visitor Insights" />
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer width="100%" height={200}>
         <LineChart
           data={visitorInsightsData}
           margin={{
