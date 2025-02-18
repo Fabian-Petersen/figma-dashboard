@@ -20,7 +20,7 @@ function DashboardMainComponent() {
     // $ Set the layout for the dashboard page, 1 column for the sidebar, spanning all rows with a max width of 15rem. The navbar span full width in the first row. The grid start on row 2 and span the rest of the space.
     <div className="grid lg:grid-cols-[minmax(10rem,15rem)_1fr] md:grid-rows-[4rem_1fr] h-auto xl:px-10">
       <NavbarDashboard className="col-start-2 row-start-1 row-end-1 max-w-7xl" />
-      <Sidebar className="col-start-1 row-start-2 row-span-4" />
+      <Sidebar className="col-start-1 row-start-2 row-span-4 mt-[3rem]" />
       <Grid className="col-start-2 col-span-4 row-start-2 row-span-full max-w-7xl xl:px-10 mt-[3rem]" />
     </div>
   );

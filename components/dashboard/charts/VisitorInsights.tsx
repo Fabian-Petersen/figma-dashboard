@@ -20,10 +20,10 @@ type Props = {
 const VisitorInsights = ({ className }: Props) => {
   return (
     <div
-      className={`${className} flex flex-col rounded-lg p-4 border border-clr_blueGray_400 shadow-md gap-4 md:max-w-[30rem]`}
+      className={`${className} flex flex-col rounded-lg p-4 shadow-md gap-4 h-auto`}
     >
       <ChartHeading title="Visitor Insights" />
-      <ResponsiveContainer width="100%" height={180}>
+      <ResponsiveContainer width="100%" height="100%">
         <LineChart
           data={visitorInsightsData}
           margin={{

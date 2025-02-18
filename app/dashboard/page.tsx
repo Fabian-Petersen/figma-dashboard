@@ -6,7 +6,7 @@ import DashMobileNavbar from "@/components/navbar/navbarDashboard/DashMobileNavb
 
 const DashboardLayout = () => {
   return (
-    <main className="xl:flex xl:justify-center py-2">
+    <main className="pb-4">
       <DashMobileNavbar />
       <DashboardMainComponent />
     </main>
