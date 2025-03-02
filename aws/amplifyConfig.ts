@@ -1,6 +1,6 @@
 import { Amplify } from "aws-amplify";
 
-export function configureAmplify() {
+export default function configureAmplify() {
   if (
     !process.env.NEXT_PUBLIC_COGNITO_USERPOOL_ID ||
     !process.env.NEXT_PUBLIC_COGNITO_CLIENT_ID
@@ -18,8 +18,11 @@ export function configureAmplify() {
         signUpVerificationMethod: "code",
         loginWith: {
           email: true,
-          phone: false,
-          username: false,
+        },
+        userAttributes: {
+          email: {
+            required: true,
+          },
         },
       },
     },

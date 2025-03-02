@@ -1,114 +1,94 @@
-// src/contexts/AuthContext.tsx
-import {
+"use client";
+
+import React, {
   createContext,
   useContext,
-  useState,
   useEffect,
+  useState,
   ReactNode,
 } from "react";
-import { signIn, signOut, getCurrentUser } from "aws-amplify/auth";
-import { useRouter } from "next/navigation";
-import { useToast } from "@/hooks/use-toast";
 
-interface AuthContextType {
-  user: { username: string; id: string } | null;
+import {
+  getCurrentUser,
+  fetchUserAttributes,
+  signOut,
+  AuthUser,
+  FetchUserAttributesOutput,
+} from "aws-amplify/auth";
+
+type AuthContextType = {
+  isAuthenticated: boolean;
   isLoading: boolean;
-  login: (username: string, password: string) => Promise<void>;
+  user: AuthUser | null;
+  userAttributes: FetchUserAttributesOutput | null;
   logout: () => Promise<void>;
-}
+  refreshUserData: () => Promise<void>;
+};
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<{ username: string; id: string } | null>(
-    null
-  );
-  const [isLoading, setIsLoading] = useState(true);
-  const router = useRouter();
-  const { toast } = useToast();
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [user, setUser] = useState<AuthUser | null>(null);
+  const [userAttributes, setUserAttributes] =
+    useState<FetchUserAttributesOutput | null>(null);
 
-  useEffect(() => {
-    checkUser();
-  }, []);
-
-  async function checkUser() {
-    try {
-      const currentUser = await getCurrentUser();
-      setUser({
-        username: currentUser.username,
-        id: currentUser.userId,
-      });
-    } catch (error) {
-      setUser(null);
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
-  }
-
-  async function login(username: string, password: string) {
+  const refreshUserData = async () => {
+    // $ Get the current user details
     try {
       setIsLoading(true);
-      const signInOutput = await signIn({
-        username: username,
-        password: password,
-      });
-
-      if (signInOutput.isSignedIn) {
-        await checkUser();
-        toast({
-          title: "Success!",
-          description: "Successfully logged in",
-          duration: 3000,
-        });
-        router.push("/dashboard");
+      const currentUser = await getCurrentUser();
+      setUser(currentUser);
+      setIsAuthenticated(true);
+      // $ Get the attributes of the users for the application
+      try {
+        const attributes = await fetchUserAttributes();
+        setUserAttributes(attributes);
+      } catch (attrError) {
+        console.error("Error fetching user attributes:", attrError);
       }
     } catch (error) {
-      console.error("Login error:", error);
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Failed to login. Please check your credentials.",
-        duration: 3000,
-      });
-      throw error;
-    } finally {
-      setIsLoading(false);
-    }
-  }
-
-  async function logout() {
-    try {
-      setIsLoading(true);
-      await signOut();
+      // User is not authenticated
       setUser(null);
-      toast({
-        title: "Success!",
-        description: "Successfully logged out",
-        duration: 3000,
-      });
-      router.push("/login");
-    } catch (error) {
-      console.error("Logout error:", error);
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Failed to logout. Please try again.",
-        duration: 3000,
-      });
+      console.log(error);
+      setUserAttributes(null);
+      setIsAuthenticated(false);
     } finally {
       setIsLoading(false);
     }
-  }
-
-  const value = {
-    user,
-    isLoading,
-    login,
-    logout,
   };
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  useEffect(() => {
+    refreshUserData();
+  }, []);
+
+  // $ Logging the user out of the application
+  const logout = async () => {
+    try {
+      await signOut({ global: true });
+      setUser(null);
+      setUserAttributes(null);
+      setIsAuthenticated(false);
+    } catch (error) {
+      console.error("Error signing out:", error);
+    }
+  };
+
+  return (
+    <AuthContext.Provider
+      value={{
+        isAuthenticated,
+        isLoading,
+        user,
+        userAttributes,
+        logout,
+        refreshUserData,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 }
 
 export function useAuth() {

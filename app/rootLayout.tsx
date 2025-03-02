@@ -3,6 +3,7 @@
 // import Navbar from "@/components/navbar/navbarDesktop/NavbarHomePage";
 import MobileNavbar from "@/components/navbar/navbarMobile/MobileNavbar";
 import NavbarHomePage from "@/components/navbar/navbarDesktop/NavbarHomePage";
+import configureAmplify from "@/aws/amplifyConfig";
 
 // $ Context Providers
 import Providers from "./providers";
@@ -14,6 +15,7 @@ type Props = {
 import { NavProvider } from "./contexts/MenuToggleContext";
 
 export default function RootLayout({ children }: Props) {
+  configureAmplify();
   const isMobile = useScreenSize(640);
   return (
     <html lang="en" className="font-poppins light">

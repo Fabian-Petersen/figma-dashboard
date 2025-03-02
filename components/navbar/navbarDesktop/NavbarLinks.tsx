@@ -5,10 +5,11 @@ import homePageLinks from "@/public/data/homePageLinks";
 import useScreenSize from "@/app/hooks/useScreenSize";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+
 function NavbarLinks() {
   const isMobile = useScreenSize(640);
   const path = usePathname();
-  console.log(path);
+  // console.log(path);
   return (
     <div
       className={`flex text-[#8794BA] capitalize ${

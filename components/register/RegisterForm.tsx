@@ -5,15 +5,15 @@ import ReturnLoginButton from "./ReturnLoginButton";
 import { useFormValidation } from "@/app/hooks/useValidateForm";
 import RegisterFormButton from "./RegisterFormButton";
 import { useRouter } from "next/navigation";
-// import { SignUp } from "@/app/utils/aws-signup";
+import { awsCognitoSignUp } from "@/app/utils/aws-signup";
+import { useToast } from "@/hooks/use-toast";
 
 const RegisterForm = () => {
   //$ Validate the form entries with the registerFormSchema using zod
   const { formErrors, validateForm, clearError, setFormStatus, getInputStyle } =
     useFormValidation("register");
-
+  const { toast } = useToast();
   const router = useRouter();
-
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -27,13 +27,39 @@ const RegisterForm = () => {
     };
 
     // $ Save the user's name to localStorage to be used in Dashboard. This will be retrieved from Cognito later.
-    localStorage.setItem("name", formDataObject.name);
+    // localStorage.setItem("name", formDataObject.name);
 
     //$ Direct to the confirm email form.
-    if (validateForm(formDataObject)) {
+    if (!validateForm(formDataObject)) {
       router.push("/confirm-signup");
       setFormStatus("error");
       return;
+    }
+    // console.log(formDataObject);
+
+    try {
+      const signupResult = awsCognitoSignUp(
+        formDataObject.name,
+        formDataObject.email,
+        formDataObject.password
+      );
+
+      router.push(`/confirm-signup?email=${formDataObject.email}`);
+
+      if (!signupResult) {
+        setFormStatus("error");
+      } else {
+        setFormStatus("success");
+        toast({
+          variant: "default",
+          title: `Welcome ${formDataObject.name}`,
+          description: "Please Provide a Valid Code",
+          duration: 3000,
+        });
+      }
+    } catch (error) {
+      setFormStatus("error");
+      console.log("Signup Error:", error);
     }
   };
 

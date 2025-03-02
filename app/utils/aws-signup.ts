@@ -1,20 +1,38 @@
 // $ aws amplify user registration function to the application
-// import { signUp, SignUpOutput } from "aws-amplify/auth";
+import { signUp, SignUpOutput } from "aws-amplify/auth";
 
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 
 // $ Basic Form Handling without AWS Cognito
 
-export function SignUp(email: string, password: string, name: string): boolean {
-  const router = useRouter();
+export async function awsCognitoSignUp(
+  name: string,
+  email: string,
+  password: string
+): Promise<SignUpOutput> {
+  try {
+    // $ Validate and format email
+    const trimmedEmail = email.trim().toLowerCase();
+    const signUpResult = await signUp({
+      username: trimmedEmail,
+      password: password,
+      options: {
+        userAttributes: {
+          name: name,
+        },
+        autoSignIn: true, // Enable auto sign-in after successful sign-up
+      },
+    });
 
-  // Check if all parameters are provided
-  if (email && password && name) {
-    router.push("/confirm-signup");
-    return true;
+    if (signUpResult.isSignUpComplete) {
+      console.log("Signup Successfull");
+    }
+
+    return signUpResult;
+  } catch (error) {
+    alert(error);
+    throw error;
   }
-
-  return false;
 }
 
 // export async function awsSignUp(
@@ -25,7 +43,8 @@ export function SignUp(email: string, password: string, name: string): boolean {
 //   try {
 //     // Validate and format email
 //     const trimmedEmail = email.trim().toLowerCase();
-//     if (!isValidEmail(trimmedEmail)) {
+//! Check the function !isValid and remove if necessary
+//    if (!isValidEmail(trimmedEmail)) {
 //       throw new Error("Invalid email format");
 //     }
 

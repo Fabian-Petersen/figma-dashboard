@@ -3,15 +3,15 @@ import FormRowInput from "../features/forms/FormRowInput";
 import { FormEvent } from "react";
 import RegisterButton from "./RegisterButton";
 import { useFormValidation } from "@/app/hooks/useValidateForm";
-// import AWSLoginButton from "./LoginButtonAWS";
-import { awsLogin } from "@/app/utils/aws-login";
+import { awsCognitoLogin } from "@/app/utils/aws-signin";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
+import { useGlobalContext } from "@/app/useGlobalContext";
 
 const LoginForm = () => {
   const router = useRouter();
   const { toast } = useToast();
-
+  const { attributes } = useGlobalContext();
   const {
     formErrors,
     // formStatus,
@@ -34,36 +34,34 @@ const LoginForm = () => {
 
     // $ Validate the form inputs with the login schema using zod.
     if (!validateForm(formDataObject)) {
+      setFormStatus("error");
       return;
     }
 
     // $ try-catch to sign into aws cognito
     try {
-      console.log(
-        "Credentials from Login Form:",
-        "email:",
+      //$ awsLogin is the function handling the signin to aws cognito using amplify "/utils/aws-login.ts"
+      const result = awsCognitoLogin(
         formDataObject.email,
-        "password:",
         formDataObject.password
       );
-      //$ awsLogin is the function handling the singin to aws cognito using amplify "/utils/aws-login.ts"
-      const result = awsLogin(formDataObject.email, formDataObject.password);
       if (!result) {
         setFormStatus("error");
       } else {
         setFormStatus("success");
         toast({
-          variant: "default",
-          title: `Welcome Back ${formDataObject.email.split("@")[0]}`,
-          description: "Please Provide a Valid Code",
+          variant: "success",
+          title: "Success!!",
+          description: `Welcome Back ${attributes?.name}`,
           duration: 3000,
         });
-        router.push("/dashboard");
       }
       // $ Route to the dashboard page if successfull.
     } catch (error) {
       setFormStatus("error");
       console.error("Login error:", error);
+    } finally {
+      router.push("/dashboard");
     }
   };
 

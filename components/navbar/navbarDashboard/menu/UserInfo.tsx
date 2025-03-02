@@ -1,34 +1,10 @@
 "use client";
-
-import React, { useEffect, useState } from "react";
 import Image from "next/image";
-// import { useUserAttributes } from "@/app/hooks/useFetchUserAttributes";
-// import { Amplify } from "aws-amplify";
-
-// Configure Amplify
-// Amplify.configure({
-//   Auth: {
-//     Cognito: {
-//       userPoolId: process.env.NEXT_PUBLIC_USERPOOL_ID as string,
-//       userPoolClientId: process.env.NEXT_PUBLIC_CLIENT_ID as string,
-//     },
-//   },
-// });
+import { useGlobalContext } from "@/app/useGlobalContext";
 
 function UserInfo() {
-  const [email, setEmail] = useState("");
-  const [usersName, setUsersName] = useState("");
-  //$ Retrieve the name attribute from Cognito
-  // const { userAttributes } = useUserAttributes();
-
-  // $ Get the users details from localstorage
-  useEffect(() => {
-    const usersName = localStorage.getItem("name");
-    const email = localStorage.getItem("email");
-    // $ remove the name from email if user did not sign in for logic purposes
-    setEmail(email ? String(email)?.split("@")[0] : "");
-    setUsersName(usersName ? String(usersName) : "");
-  }, []);
+  // $ Authenticated User with user atrributes
+  const { attributes } = useGlobalContext();
 
   return (
     <div className="flex gap-3 items-center">
@@ -42,8 +18,7 @@ function UserInfo() {
       </div>
       <div className="flex flex-col justify-center">
         <p className="text-clr_blueGray_900 text-[14px] font-semibold capitalize">
-          {usersName || email}
-          {/* {userAttributes?.name} */}
+          {attributes?.name}
         </p>
         <p className="text-clr_blueGray_700 text-[12px]">Admin</p>
       </div>

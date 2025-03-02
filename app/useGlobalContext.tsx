@@ -7,8 +7,15 @@ import {
   useContext,
   useState,
   Dispatch,
+  useEffect,
   SetStateAction,
 } from "react";
+
+import {
+  fetchUserAttributes,
+  FetchUserAttributesOutput,
+  signOut,
+} from "aws-amplify/auth";
 
 // $ Step 0: Define the types and specify the navOpen type and set it to false initially'
 
@@ -17,24 +24,9 @@ export type Theme = "light" | "dark";
 export type T = {
   navOpen: boolean;
   setNavOpen: Dispatch<SetStateAction<boolean>>;
-  theme: Theme;
-  setTheme: Dispatch<SetStateAction<Theme>>;
-  isDarkTheme: boolean;
-  setIsDarkTheme: Dispatch<SetStateAction<boolean>>;
-  projectType: string;
-  setProjectType: Dispatch<SetStateAction<string>>;
+  attributes: FetchUserAttributesOutput | null;
+  logout: () => Promise<void>;
 };
-
-// const initialState: T = {
-//   navOpen: false,
-//   setNavOpen: () => {},
-//   theme: "light",
-//   setTheme: () => {},
-//   isDarkTheme: false,
-//   setIsDarkTheme: () => {},
-//   projectType: "all",
-//   setProjectType: () => {},
-// };
 
 // $ Step 1: Create the context
 // % The ThemeContext type takes in the ThemeContext type or null
@@ -43,31 +35,50 @@ export const AppContext = createContext<T | undefined>(undefined);
 // $ Step 2: Create the provider for the context
 const AppProvider = ({ children }: { children: React.ReactNode }) => {
   // $ Step 3: Create the state and set the initial state value
-
   // ? The navOpen state toggles the navbar on and off on mobile devices
   const [navOpen, setNavOpen] = useState<boolean>(false);
+  const [attributes, setAttributes] =
+    useState<FetchUserAttributesOutput | null>(null);
 
-  // ? The theme "light | dark" toggles the theme in the localStorage to set the value either light and dark in the 'useSetDarkTheme' hook.
-  const [theme, setTheme] = useState<Theme>("light");
+  const userData = async () => {
+    try {
+      // $ Get the attributes of the users for the application
+      try {
+        const attributes = await fetchUserAttributes();
+        setAttributes(attributes);
+      } catch (attrError) {
+        console.error("Error fetching user attributes:", attrError);
+      }
+    } catch (error) {
+      // User is not authenticated
+      console.log(error);
+      setAttributes(null);
+    }
+  };
 
-  // ? The isDarktheme manages toggles the theme between light and dark by setting the theme to the opposite of the current theme.
-  // ? The isDarkTheme is used to set the theme in the 'useSetDarkTheme' hook.
-  const [isDarkTheme, setIsDarkTheme] = useState<boolean>(false);
+  useEffect(() => {
+    userData();
+  }, []);
 
-  const [projectType, setProjectType] = useState<string>("all");
-  // $ State to filter the projects by projectType to display the different projects in the gallery component.
+  // $ Logging the user out of the application
+  const logout = async () => {
+    try {
+      await signOut({ global: true });
+      // setUser(null);
+      // setUserAttributes(null);
+      // setIsAuthenticated(false);
+    } catch (error) {
+      console.error("Error signing out:", error);
+    }
+  };
 
   return (
     <AppContext.Provider
       value={{
         navOpen,
         setNavOpen,
-        theme,
-        setTheme,
-        isDarkTheme,
-        setIsDarkTheme,
-        projectType,
-        setProjectType,
+        attributes,
+        logout,
       }}
     >
       {children}

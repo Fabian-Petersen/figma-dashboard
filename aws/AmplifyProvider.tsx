@@ -1,31 +1,32 @@
-// src/providers/AmplifyProvider.tsx
-import { ReactNode, useEffect, useState } from "react";
-import { configureAmplify } from "@/aws/amplifyConfig";
+// ! Remove this code when authentication work as expected.
 
-interface AmplifyProviderProps {
-  children: ReactNode;
-}
+// import { ReactNode, useEffect, useState } from "react";
+// import configureAmplify from "@/aws/amplifyConfig";
 
-export function AmplifyProvider({ children }: AmplifyProviderProps) {
-  const [isConfigured, setIsConfigured] = useState(false);
-  useEffect(() => {
-    console.log("UserPoolId:", process.env.NEXT_PUBLIC_COGNITO_USERPOOL_ID);
-    console.log("ClientId:", process.env.NEXT_PUBLIC_COGNITO_CLIENT_ID);
-    // ... rest of the code
-  }, []);
+// interface AmplifyProviderProps {
+//   children: ReactNode;
+// }
 
-  useEffect(() => {
-    try {
-      configureAmplify();
-      setIsConfigured(true);
-    } catch (error) {
-      console.error("Error configuring Amplify:", error);
-    }
-  }, []);
+// export function AmplifyProvider({ children }: AmplifyProviderProps) {
+//   const [isConfigured, setIsConfigured] = useState(false);
+//   useEffect(() => {
+//     console.log("UserPoolId:", process.env.NEXT_PUBLIC_COGNITO_USERPOOL_ID);
+//     console.log("ClientId:", process.env.NEXT_PUBLIC_COGNITO_CLIENT_ID);
+//     // ... rest of the code
+//   }, []);
 
-  if (!isConfigured) {
-    return null;
-  }
+//   useEffect(() => {
+//     try {
+//       configureAmplify();
+//       setIsConfigured(true);
+//     } catch (error) {
+//       console.error("Error configuring Amplify:", error);
+//     }
+//   }, []);
 
-  return <>{children}</>;
-}
+//   if (!isConfigured) {
+//     return null;
+//   }
+
+//   return <>{children}</>;
+// }
