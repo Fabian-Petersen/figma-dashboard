@@ -1,6 +1,6 @@
 import * as z from "zod";
 
-// $ Schema for the Login and Register Form
+// $ Schema for the Login Form
 export const loginSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email address" }),
   password: z
@@ -13,6 +13,7 @@ export const loginSchema = z.object({
 
 export type LoginFormData = z.infer<typeof loginSchema>;
 
+// $ Schema for the Register Form
 export const RegisterFormSchema = z.object({
   name: z.string().min(1, {
     message: "Name must be at least 1 character",
@@ -38,11 +39,20 @@ export const RegisterFormSchema = z.object({
   confirmPassword: z
     .string()
     .min(1, {
-      message: "Please ensure the passwords match",
+      message: "Name must be at least 1 character",
     })
-    .refine((value) =>
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/g.test(
-        value
-      )
+    .refine(
+      (value) =>
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/g.test(
+          value
+        ),
+      {
+        message: "The Confirmed Password must match the passord",
+      }
     ),
+});
+
+// $ Schema for the Confirm Email Form
+export const ConfirmEmailSchema = z.object({
+  code: z.string().min(6, { message: "Please enter a valid code" }),
 });

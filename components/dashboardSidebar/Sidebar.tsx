@@ -1,5 +1,6 @@
-import React from "react";
+// $ This is the main component for the sidebar. The children are the sidebarLinks Component. Also, the logo is noy displayed on screen size less than 968px.
 
+import React from "react";
 import LogoSidebar from "./LogoSidebar";
 import SideBarLinks from "./SideBarLinks";
 import useScreenSize from "@/app/hooks/useScreenSize";

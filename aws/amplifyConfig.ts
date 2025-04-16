@@ -1,3 +1,5 @@
+// $ This is the configuration file for Amplify by setting all the environment variables.
+
 import { Amplify } from "aws-amplify";
 
 export default function configureAmplify() {

@@ -1,5 +1,7 @@
 "use client";
 
+// $ This Context Provided handles the Amplify Global state for the application.
+
 import React, {
   createContext,
   useContext,

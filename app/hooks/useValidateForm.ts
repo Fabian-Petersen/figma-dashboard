@@ -1,3 +1,5 @@
+// $ This hook validates the forms by passing in the relevant schema from the schemas file and sets the approprriate error states.
+
 import { useState } from "react";
 import { z } from "zod";
 import { loginSchema, RegisterFormSchema } from "@/app/schemas";
@@ -8,10 +10,10 @@ type FormErrors = {
 
 type FormStatus = "idle" | "error" | "success";
 
-// Define union type for possible form types
+// $ Define union type for possible form types
 type FormType = "login" | "register";
 
-// Create a type that maps form types to their schema types
+// $ Create a type that maps form types to their schema types
 type SchemaType<T extends FormType> = T extends "login"
   ? z.infer<typeof loginSchema>
   : T extends "register"
@@ -87,7 +89,9 @@ export const useFormValidation = <T extends FormType>(
     }
   };
 
+  // $ Style the input fields based on the formStatus
   const getInputStyle = (fieldName: string) => {
+    // $ Base style applicable to all input fields
     const baseStyle =
       "w-full p-2 rounded outline-none transition-all duration-200";
 

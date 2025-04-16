@@ -1,6 +1,6 @@
 "use client";
 
-// use the react context hook to manage the state of navOpen (true or false) and setNavOpen to change the state
+// $ Use the react context hook to manage the global state of the application
 import React from "react";
 import {
   createContext,
@@ -18,8 +18,6 @@ import {
 } from "aws-amplify/auth";
 
 // $ Step 0: Define the types and specify the navOpen type and set it to false initially'
-
-export type Theme = "light" | "dark";
 
 export type T = {
   navOpen: boolean;
@@ -40,9 +38,9 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const [attributes, setAttributes] =
     useState<FetchUserAttributesOutput | null>(null);
 
+  // $ Get the attributes of the users for the application from the Amplify API
   const userData = async () => {
     try {
-      // $ Get the attributes of the users for the application
       try {
         const attributes = await fetchUserAttributes();
         setAttributes(attributes);
@@ -60,7 +58,7 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
     userData();
   }, []);
 
-  // $ Logging the user out of the application
+  // $ Logging the user out of the application using Amplify
   const logout = async () => {
     try {
       await signOut({ global: true });
